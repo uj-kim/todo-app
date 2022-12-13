@@ -22,6 +22,8 @@ const AddTodo = ({ addItem }) => {
     }
   };
 
+
+
   return (
     <div className="AddTodo">
       <input

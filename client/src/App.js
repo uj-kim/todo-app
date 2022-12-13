@@ -36,11 +36,17 @@ function App() {
     //setTodoItems(todoItems.concat(newItem))과 같다
   };
 
+  const delItem = (targetItem) => {
+    //console.log(targetItem);
+    const result = todoItems.filter((item) => item.id !== targetItem.id);
+    setTodoItems(result);
+  };
+
   return (
     <div className="App">
       <AddTodo addItem={addItem} />
       {todoItems.map((item) => {
-        return <Todo key={item.id} item={item} />; // map함수는 return을 한다,,,
+        return <Todo key={item.id} item={item} delItem={delItem} />; // map함수는 return을 한다,,,
       })}
     </div>
   );
