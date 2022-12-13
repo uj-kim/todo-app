@@ -8,8 +8,37 @@ const Todo = ({ item, delItem }) => {
 
   const [todoItem, setTodoItem] = useState(item);
 
+  const [isreadOnly, setReadOnly] = useState(true);
+
   const delClick = (todoItem) => {
     delItem(todoItem);
+  };
+
+  const editEventHandler = (e) => {
+    //rest: id, done 정보
+    const { title, ...rest } = todoItem;
+    setTodoItem({
+      title: e.target.value,
+      ...rest,
+    });
+  };
+
+  // checkbox 업데이트
+  // done : true -> false, false -> true
+  const checkboxEventHandler = () => {
+    todoItem.done = !todoItem.done;
+    setTodoItem(todoItem);
+  };
+
+  const offReadOnlyMode = () => {
+    setReadOnly(false);
+  };
+
+  const onEnterKey = (e) => {
+    if (e.key == "Enter") {
+      console.log(item);
+      setReadOnly(true);
+    }
   };
 
   return (
@@ -21,8 +50,18 @@ const Todo = ({ item, delItem }) => {
         name={`todo${id}`}
         value={`todo${id}`}
         defaultChecked={done}
+        onChange={checkboxEventHandler}
       />
-      <label htmlFor={`todo${id}`}>{title}</label>
+      {/* <label htmlFor={`todo${id}`}>{title}</label> */}
+      <input
+        type="text"
+        value={todoItem.title}
+        onChange={editEventHandler}
+        onKeyPress={onEnterKey}
+        readOnly={isreadOnly}
+        onFocus={offReadOnlyMode}
+        onBlur={() => setReadOnly(true)}
+      />
       <button onClick={() => delClick(item.id)}>Delete</button>
     </div>
   );
