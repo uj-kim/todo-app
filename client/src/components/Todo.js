@@ -25,11 +25,14 @@ const Todo = ({ item, delItem }) => {
 
   // checkbox 업데이트
   // done : true -> false, false -> true
-  const checkboxEventHandler = () => {
-    todoItem.done = !todoItem.done;
-    setTodoItem(todoItem);
+  const checkboxEventHandler = (e) => {
+    // rest: id, title 정보
+    const { done, ...rest } = todoItem; // { id: 1, title: 'todo1', done: false, }
+    setTodoItem({
+      done: e.target.checked,
+      ...rest,
+    });
   };
-
   const offReadOnlyMode = () => {
     setReadOnly(false);
   };
