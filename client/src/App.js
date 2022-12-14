@@ -44,10 +44,23 @@ function App() {
 
   return (
     <div className="App">
+      <div className="heading">
+        <img
+          className="heading__img"
+          src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/756881/laptop.svg"
+        />
+        <h1 className="heading__title">To-Do List</h1>
+      </div>
+      <label htmlFor="todo">~ Today I need to ~</label>
       <AddTodo addItem={addItem} />
-      {todoItems.map((item) => {
-        return <Todo key={item.id} item={item} delItem={delItem} />; // map함수는 return을 한다,,,
-      })}
+      <div className="left-todos">🚀 {todoItems.length} Todos</div>
+      {todoItems.length > 0 ? (
+        todoItems.map((item) => {
+          return <Todo key={item.id} item={item} delItem={delItem} />; // map함수는 return을 한다,,,
+        })
+      ) : (
+        <p className="empty-todos">Todo를 추가해주세요 </p>
+      )}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 // 1. 함수형 컴포넌트
 
 import { useState } from "react";
+import "../styles/style.scss";
 
 // 2. input과 button을 가짐
 const AddTodo = ({ addItem }) => {
@@ -11,6 +12,9 @@ const AddTodo = ({ addItem }) => {
   });
 
   const onButtonClick = () => {
+    if (todoItem.title.trim().length === 0) {
+      return;
+    }
     //props로 받아온 addItem 함수 실행
     addItem(todoItem); //{title: 'input 입력값'}
     setTodoItem({ title: "" }); //input 초기화
@@ -22,18 +26,21 @@ const AddTodo = ({ addItem }) => {
     }
   };
 
-
-
   return (
     <div className="AddTodo">
       <input
+        id="addbox"
         type="text"
         placeholder="Add your new Todo"
         value={todoItem.title}
         onChange={(e) => setTodoItem({ title: e.target.value })}
         onKeyPress={onEnterKey}
+        autoFocus
+        required
       />
-      <button onClick={onButtonClick}>ADD</button>
+      <button onClick={onButtonClick}>
+        <span>ADD</span>
+      </button>
     </div>
   );
 };
