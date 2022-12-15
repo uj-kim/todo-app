@@ -85,7 +85,7 @@ router.delete("/todo/:todoId", async (req, res) => {
       },
     });
     if (!delTodo) {
-      return res.send(false); 
+      return res.send(false);
     }
     res.send(true);
   } catch (err) {
