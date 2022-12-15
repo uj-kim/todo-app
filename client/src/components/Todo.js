@@ -4,7 +4,7 @@
 import { useState } from "react";
 import "../styles/style.scss";
 
-const Todo = ({ item, delItem }) => {
+const Todo = ({ item, delItem, updateItem }) => {
   const { id, title, done } = item;
 
   const [todoItem, setTodoItem] = useState(item);
@@ -29,10 +29,12 @@ const Todo = ({ item, delItem }) => {
   const checkboxEventHandler = (e) => {
     // rest: id, title 정보
     const { done, ...rest } = todoItem; // { id: 1, title: 'todo1', done: false, }
-    setTodoItem({
+    const updatedItem = {
       done: e.target.checked,
       ...rest,
-    });
+    };
+    setTodoItem(updatedItem);
+    updateItem(updatedItem);
   };
   const offReadOnlyMode = () => {
     setReadOnly(false);
@@ -42,6 +44,7 @@ const Todo = ({ item, delItem }) => {
     if (e.key == "Enter") {
       console.log(item);
       setReadOnly(true);
+      updateItem(todoItem);
     }
   };
 

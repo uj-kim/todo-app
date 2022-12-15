@@ -54,6 +54,17 @@ function App() {
     setTodoItems(result);
   };
 
+  // API를 이용해서 update하려면
+  // (1) server/routes/todo.js API를 이용해 서버 데이터를 업데이트 한 후
+  // (2) 변경된 내용을 화면에 다시 출력하는 작업
+  const updateItem = async (targetItem) => {
+    console.log(targetItem);
+    // axios.patch(url, data)
+    await axios.patch(
+      `http://localhost:8080/todo/${targetItem.id}`,
+      targetItem
+    );
+  };
   return (
     <div className="App">
       <div className="heading">
@@ -68,7 +79,14 @@ function App() {
       <div className="left-todos">🚀 {todoItems.length} Todos</div>
       {todoItems.length > 0 ? (
         todoItems.map((item) => {
-          return <Todo key={item.id} item={item} delItem={delItem} />; // map함수는 return을 한다,,,
+          return (
+            <Todo
+              key={item.id}
+              item={item}
+              delItem={delItem}
+              updateItem={updateItem}
+            />
+          ); // map함수는 return을 한다,,,
         })
       ) : (
         <p className="empty-todos">..Todo를 추가해주세요.. </p>
