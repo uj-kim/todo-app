@@ -4,7 +4,7 @@ const PORT = 8080;
 const todoRouter = require("./routes/todo");
 const cors = require("cors"); // cors 정책 해결
 const corsConfig = {
-  origin: "http://localhost:3001",
+  origin: "http://localhost:3000",
   credentials: true,
 };
 

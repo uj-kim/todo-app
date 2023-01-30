@@ -6,7 +6,7 @@ import AddTodo from "./components/AddTodo";
 function App() {
   const [todoItems, setTodoItems] = useState([]);
 
-  const todoId = useRef(4);
+  const todoId = useRef(0);
 
   useEffect(() => {
     console.log("첫 렌더링 완료!");
